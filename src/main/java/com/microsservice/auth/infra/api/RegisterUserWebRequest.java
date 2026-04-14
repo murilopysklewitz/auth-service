@@ -1,10 +1,12 @@
 package com.microsservice.auth.infra.api;
 
 import com.microsservice.auth.domain.UserRole;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
 public class RegisterUserWebRequest {
     @NotNull
+    @Email
     private final String email;
     @NotNull
     private final String password;

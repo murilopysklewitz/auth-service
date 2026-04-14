@@ -2,10 +2,9 @@ package com.microsservice.auth.infra.persistence;
 
 import com.microsservice.auth.domain.UserRole;
 import com.microsservice.auth.domain.UserStatus;
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-import jakarta.persistence.Index;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -13,21 +12,27 @@ import java.util.UUID;
 @Table(name = "users",indexes = {
         @Index(name = "idx_users_email", columnList = "email", unique = true)
 })
-
+@Entity
 public class UserJpaEntity {
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
-
+    @Column(name = "email", nullable = false, unique = true, length = 60)
     private String email;
+    @Column(name = "password_hash", nullable = false, length = 24)
     private String passwordHash;
-
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
     private UserRole role;
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
     private UserStatus status;
 
 
-
+    @CreationTimestamp
     private LocalDateTime createdAt;
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
     public UserJpaEntity(UUID id, String email, String passwordHash, UserRole role, UserStatus status, LocalDateTime createdAt, LocalDateTime updatedAt) {

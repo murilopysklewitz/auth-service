@@ -5,6 +5,7 @@ import com.microsservice.auth.domain.UserRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class JpaUserRepository implements UserRepository {
@@ -17,6 +18,11 @@ public class JpaUserRepository implements UserRepository {
     @Override
     public Optional<User> findByEmail(String email) {
         return repository.findByEmail(email).map(UserMapper::toDomain);
+    }
+
+    @Override
+    public Optional<User> findById(String id) {
+        return repository.findById(UUID.fromString(id)).map(UserMapper::toDomain);
     }
 
     @Override
