@@ -1,4 +1,4 @@
-package com.microsservice.auth.domain;
+package com.microsservice.auth.domain.ports;
 
 public interface PasswordHasher {
     public String hash(String rawPassword);

@@ -1,4 +1,4 @@
-package com.microsservice.auth.infra.api;
+package com.microsservice.auth.infra.api.authController;
 
 import com.microsservice.auth.domain.UserRole;
 import jakarta.validation.constraints.Email;

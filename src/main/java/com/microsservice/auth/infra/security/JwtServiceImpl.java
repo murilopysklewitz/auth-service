@@ -1,6 +1,6 @@
-package com.microsservice.auth.infra;
+package com.microsservice.auth.infra.security;
 
-import com.microsservice.auth.domain.JwtService;
+import com.microsservice.auth.domain.ports.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

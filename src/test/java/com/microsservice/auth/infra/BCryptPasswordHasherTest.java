@@ -1,5 +1,6 @@
 package com.microsservice.auth.infra;
 
+import com.microsservice.auth.infra.security.BCryptPasswordHasher;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

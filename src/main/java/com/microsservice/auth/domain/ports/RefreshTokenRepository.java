@@ -1,4 +1,7 @@
-package com.microsservice.auth.domain;
+package com.microsservice.auth.domain.ports;
+
+import com.microsservice.auth.domain.RefreshToken;
+import com.microsservice.auth.domain.User;
 
 public interface RefreshTokenRepository {
     RefreshToken save(RefreshToken refreshToken);

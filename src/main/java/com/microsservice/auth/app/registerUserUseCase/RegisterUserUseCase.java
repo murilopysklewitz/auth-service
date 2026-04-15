@@ -1,9 +1,10 @@
-package com.microsservice.auth.app;
+package com.microsservice.auth.app.registerUserUseCase;
 
-import com.microsservice.auth.domain.JwtService;
-import com.microsservice.auth.domain.PasswordHasher;
+import com.microsservice.auth.domain.exceptions.EmailAlreadyRegisteredException;
+import com.microsservice.auth.domain.ports.JwtService;
+import com.microsservice.auth.domain.ports.PasswordHasher;
 import com.microsservice.auth.domain.User;
-import com.microsservice.auth.domain.UserRepository;
+import com.microsservice.auth.domain.ports.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.microsservice.auth.app;
+package com.microsservice.auth.domain.exceptions;
 
 public class EmailAlreadyRegisteredException extends RuntimeException {
     public EmailAlreadyRegisteredException(String email) {

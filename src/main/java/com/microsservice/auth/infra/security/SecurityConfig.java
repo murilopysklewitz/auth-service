@@ -1,4 +1,4 @@
-package com.microsservice.auth.infra;
+package com.microsservice.auth.infra.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

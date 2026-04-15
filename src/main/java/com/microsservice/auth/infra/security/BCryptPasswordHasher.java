@@ -1,6 +1,6 @@
-package com.microsservice.auth.infra;
+package com.microsservice.auth.infra.security;
 
-import com.microsservice.auth.domain.PasswordHasher;
+import com.microsservice.auth.domain.ports.PasswordHasher;
 import org.springframework.stereotype.Component;
 
 @Component

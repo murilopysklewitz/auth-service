@@ -1,6 +1,5 @@
-package com.microsservice.auth.infra.api;
+package com.microsservice.auth.infra.api.errors;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 

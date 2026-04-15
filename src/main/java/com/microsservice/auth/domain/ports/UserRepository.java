@@ -1,4 +1,6 @@
-package com.microsservice.auth.domain;
+package com.microsservice.auth.domain.ports;
+
+import com.microsservice.auth.domain.User;
 
 import java.util.Optional;
 

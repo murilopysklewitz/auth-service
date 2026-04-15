@@ -1,7 +1,7 @@
 package com.microsservice.auth.infra.persistence;
 
 import com.microsservice.auth.domain.User;
-import com.microsservice.auth.domain.UserRepository;
+import com.microsservice.auth.domain.ports.UserRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

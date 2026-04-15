@@ -1,4 +1,4 @@
-package com.microsservice.auth.app;
+package com.microsservice.auth.app.registerUserUseCase;
 
 import com.microsservice.auth.domain.UserRole;
 

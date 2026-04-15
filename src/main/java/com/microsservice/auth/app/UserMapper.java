@@ -1,5 +1,7 @@
 package com.microsservice.auth.app;
 
+import com.microsservice.auth.app.registerUserUseCase.RegisterUserRequest;
+import com.microsservice.auth.app.registerUserUseCase.RegisterUserResponse;
 import com.microsservice.auth.domain.User;
 
 public class UserMapper {
