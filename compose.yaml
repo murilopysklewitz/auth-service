@@ -13,7 +13,7 @@ services:
     env_file:
       - .env
     networks:
-      - auth_network
+      - secure_api_bank
   postgres:
     container_name: "auth_db"
     image: postgres:15
@@ -24,7 +24,7 @@ services:
     ports:
       - '5432'
     networks:
-      - auth_network
+      - secure_api_bank
 
   rabbitmq:
     image: rabbitmq:3
@@ -34,7 +34,7 @@ services:
     ports:
       - '5672'
     networks:
-        - auth_network
+        - secure_api_bank
 networks:
-  auth_network:
+  secure_api_bank:
     driver: bridge
