@@ -5,15 +5,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
+import java.util.UUID;
+
 public class JwtServiceImplTest {
-    private String userId;
+    private UUID userId;
     private String role;
     @Mock
     private JwtServiceImpl jwtService;
 
     @BeforeEach
     void setUp() {
-        userId = "12345";
+        userId = UUID.randomUUID();
         role = "USER";
         jwtService = new JwtServiceImpl("test-secret-test-secret-test-secret", 3600000);
     }

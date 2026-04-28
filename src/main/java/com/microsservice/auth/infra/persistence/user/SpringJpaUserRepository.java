@@ -1,4 +1,4 @@
-package com.microsservice.auth.infra.persistence;
+package com.microsservice.auth.infra.persistence.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

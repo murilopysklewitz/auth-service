@@ -1,9 +1,10 @@
 package com.microsservice.auth.domain.ports;
 
 import java.util.Date;
+import java.util.UUID;
 
 public interface JwtService {
-    String generateToken(String userId, String role);
+    String generateToken(UUID userId, String role);
     boolean isTokenValid(String token);
     String extractRole(String token);
     String extractJti(String token);

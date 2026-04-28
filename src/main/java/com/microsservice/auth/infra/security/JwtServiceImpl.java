@@ -27,7 +27,7 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public String generateToken(String userId, String role) {
+    public String generateToken(UUID userId, String role) {
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", role);
@@ -35,7 +35,7 @@ public class JwtServiceImpl implements JwtService {
         return Jwts.builder()
                 .claims(claims)
                 .id(UUID.randomUUID().toString())
-                .subject(userId)
+                .subject(userId.toString())
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + jwtExpiration))
                 .signWith(getSigningKey())
