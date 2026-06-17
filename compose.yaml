@@ -14,6 +14,7 @@ services:
       - .env
     networks:
       - secure_api_bank
+
   postgres:
     container_name: "auth_db"
     image: postgres:15
@@ -23,6 +24,14 @@ services:
       POSTGRES_USER: ${DB_USER}
     ports:
       - '5432'
+    networks:
+      - secure_api_bank
+
+  redis:
+    image: redis:7
+    container_name: "auth_redis"
+    ports:
+      - '6379'
     networks:
       - secure_api_bank
 

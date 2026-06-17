@@ -5,6 +5,7 @@ import com.microsservice.auth.domain.RefreshToken;
 import com.microsservice.auth.domain.ports.RefreshTokenRepository;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ public class JpaRefreshTokenRepository implements RefreshTokenRepository {
     private final SpringJpaRefreshTokenRepository repository;
     private final RefreshTokenMapper mapper;
 
-    public JpaRefreshTokenRepository(SpringJpaRefreshTokenRepository repository, RefreshTokenMapper mapper) {
+    public JpaRefreshTokenRepository(SpringJpaRefreshTokenRepository repository,  RefreshTokenMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
@@ -22,6 +23,7 @@ public class JpaRefreshTokenRepository implements RefreshTokenRepository {
     public RefreshToken save(RefreshToken refreshToken) {
         RefreshTokenJpaEntity entity = mapper.toEntity(refreshToken);
         RefreshTokenJpaEntity savedEntity = repository.save(entity);
+
         return mapper.toDomain(savedEntity);
     }
 
@@ -47,5 +49,9 @@ public class JpaRefreshTokenRepository implements RefreshTokenRepository {
     @Override
     public void deleteExpiredTokens() {
         repository.deleteExpiredTokens();
+    }
+
+    private String key(UUID key){
+        return "refresh_token:" + key.toString();
     }
 }

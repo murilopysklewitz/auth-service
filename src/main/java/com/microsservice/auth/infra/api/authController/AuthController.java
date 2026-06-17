@@ -55,8 +55,8 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody @Valid LoginWebRequest request){
         LoginRequest loginRequest = new LoginRequest(request.getEmail(), request.getPassword());
-        loginUseCase.execute(loginRequest);
-        return ResponseEntity.status(200).build();
+        LoginResponse response = loginUseCase.execute(loginRequest);
+        return ResponseEntity.status(200).body(response);
     }
 
     @PostMapping("/refresh")

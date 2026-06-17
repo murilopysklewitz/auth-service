@@ -20,7 +20,7 @@ public class UserJpaEntity {
     private UUID id;
     @Column(name = "email", nullable = false, unique = true, length = 60)
     private String email;
-    @Column(name = "password_hash", nullable = false, length = 24)
+    @Column(name = "password_hash", nullable = false, length = 60)
     private String passwordHash;
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
