@@ -1,14 +1,14 @@
 spring:
   profile: docker
   datasource:
-    url: jdbc:postgresql://db:5432/postgres
+    url: ${POSTGRES_URL}
     username: ${DB_USER}
     password: ${DB_PASSWORD}
-    DRIVER_CLASS_NAME: org.postgresql.Driver
+    driver_class_name: org.postgresql.Driver
   data:
     redis:
-      host: redis
-      port: 6379
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT:6379}
   jpa:
     hibernate:
       ddl-auto: validate
