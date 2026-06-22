@@ -13,7 +13,7 @@ public class LogoutUseCase {
     }
 
     public void execute(LogoutRequest request){
-        RefreshToken refreshToken = refreshTokenRepository.findByTokenId(request.refreshTokenId());
+        RefreshToken refreshToken = refreshTokenRepository.findById(request.refreshTokenId());
         refreshToken.revoke();
         refreshTokenRepository.save(refreshToken);
 

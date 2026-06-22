@@ -7,8 +7,11 @@ import java.util.UUID;
 
 public interface RefreshTokenRepository {
     RefreshToken save(RefreshToken refreshToken);
-    RefreshToken findByTokenId(UUID tokenId);
-    void delete(UUID refreshTokenId);
+    RefreshToken findById(UUID id);
+
+    void deleteById(UUID refreshTokenId);
+
+
     void revokeTokensForUser(UUID userId);
     void deleteExpiredTokens();
 }

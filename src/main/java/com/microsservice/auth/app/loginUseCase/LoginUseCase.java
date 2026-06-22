@@ -57,6 +57,6 @@ public class LoginUseCase {
         );
         refreshTokenStore.save(refreshToken);
 
-        return new LoginResponse(accessToken, refreshToken.getTokenId().toString(), user.getId().toString(), user.getRole().name());
+        return new LoginResponse(accessToken, refreshToken.getId().toString(), user.getId().toString(), user.getRole().name());
     }
 }

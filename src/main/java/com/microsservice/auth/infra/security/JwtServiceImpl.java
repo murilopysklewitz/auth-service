@@ -20,10 +20,9 @@ public class JwtServiceImpl implements JwtService {
 
     private long jwtExpiration;
 
-    public JwtServiceImpl(@Value("${jwt.secret}") String secretKey,
-                          @Value("${jwt.expiration}") long jwtExpiration) {
-        this.secretKey = secretKey;
-        this.jwtExpiration = jwtExpiration;
+    public JwtServiceImpl(JwtProperties props) {
+        this.secretKey = props.getSecret();
+        this.jwtExpiration = props.getExpiration();
     }
 
     @Override

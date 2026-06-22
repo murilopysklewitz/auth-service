@@ -5,7 +5,6 @@ import com.microsservice.auth.domain.RefreshToken;
 import com.microsservice.auth.domain.ports.RefreshTokenRepository;
 import org.springframework.stereotype.Component;
 
-import java.time.Duration;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,8 +27,8 @@ public class JpaRefreshTokenRepository implements RefreshTokenRepository {
     }
 
     @Override
-    public RefreshToken findByTokenId(UUID tokenId) {
-        Optional<RefreshToken> entity = repository.findById(tokenId).map(mapper::toDomain);
+    public RefreshToken findById(UUID id) {
+        Optional<RefreshToken> entity = repository.findById(id).map(mapper::toDomain);
         if (entity.isEmpty()) {
             throw new RuntimeException("Refresh token not found");
         }
@@ -37,7 +36,7 @@ public class JpaRefreshTokenRepository implements RefreshTokenRepository {
     }
 
     @Override
-    public void delete(UUID refreshTokenId) {
+    public void deleteById(UUID refreshTokenId) {
         repository.delete(refreshTokenId);
     }
 

@@ -40,7 +40,7 @@ public class RefreshTokenTest {
         RefreshToken refreshToken = RefreshToken.create(userId, role, ttl);
 
         assertNotNull(refreshToken);
-        assertNotNull(refreshToken.getTokenId());
+        assertNotNull(refreshToken.getId());
         assertEquals(userId, refreshToken.getUserId());
         assertEquals(role, refreshToken.getRole());
         assertTrue(refreshToken.getExpiresAt().isAfter(Instant.now()));
@@ -85,7 +85,7 @@ public class RefreshTokenTest {
     void shouldRestoreRefreshToken() {
         RefreshToken refreshToken = RefreshToken.restore(tokenId, userId, role, expiresAt, createdAt, revoked, revokedAt);
 
-        assertEquals(tokenId, refreshToken.getTokenId());
+        assertEquals(tokenId, refreshToken.getId());
         assertEquals(userId, refreshToken.getUserId());
         assertEquals(role, refreshToken.getRole());
         assertEquals(expiresAt, refreshToken.getExpiresAt());

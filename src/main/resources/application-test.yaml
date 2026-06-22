@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+  flyway:
+    enabled: false
+jwt:
+    secret: test-secret
+    expiration: 1500000
+    refresh-expiration: 604800000

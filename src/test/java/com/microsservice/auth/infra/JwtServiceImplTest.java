@@ -3,28 +3,37 @@ package com.microsservice.auth.infra;
 import com.microsservice.auth.infra.security.JwtServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 import java.util.UUID;
 
-public class JwtServiceImplTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+class JwtServiceImplTest {
+
+    private JwtServiceImpl jwtService;
+
     private UUID userId;
     private String role;
-    @Mock
-    private JwtServiceImpl jwtService;
 
     @BeforeEach
     void setUp() {
         userId = UUID.randomUUID();
         role = "USER";
-        jwtService = new JwtServiceImpl("test-secret-test-secret-test-secret", 3600000);
+
+        JwtProperties props = new JwtProperties();
+        props.setSecret("12345678901234567890123456789012");
+        props.setExpiration(1500000L);
+
+        jwtService = new JwtServiceImpl(props);
     }
 
     @Test
     void shouldGenerateValidToken() {
         String token = jwtService.generateToken(userId, role);
-        assert jwtService.isTokenValid(token);
-        assert jwtService.extractUserId(token).equals(userId);
-        assert jwtService.extractRole(token).equals(role);
+
+        assertTrue(jwtService.isTokenValid(token));
+        assertEquals(role, jwtService.extractRole(token));
+        assertEquals(userId.toString(), jwtService.extractUserId(token));
     }
 }

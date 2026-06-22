@@ -5,7 +5,7 @@ import com.microsservice.auth.domain.RefreshToken;
 public class RefreshTokenMapper {
     public RefreshToken toDomain(RefreshTokenJpaEntity entity){
         RefreshToken domain = RefreshToken.restore(
-                entity.getTokenId(),
+                entity.getId(),
                 entity.getUserId(),
                 entity.getRole(),
                 entity.getExpiresAt(),
@@ -18,7 +18,7 @@ public class RefreshTokenMapper {
 
     public RefreshTokenJpaEntity toEntity (RefreshToken domain){
         RefreshTokenJpaEntity entity =  new RefreshTokenJpaEntity(
-                domain.getTokenId(),
+                domain.getId(),
                 domain.getUserId(),
                 domain.getRole(),
                 domain.getExpiresAt(),

@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class RefreshToken {
 
-    private final UUID tokenId;
+    private final UUID id;
     private final UUID userId;
     private final String role;
 
@@ -17,8 +17,8 @@ public class RefreshToken {
     private boolean revoked;
     private Instant revokedAt;
 
-    public RefreshToken(UUID tokenId, UUID userId, String role, Instant expiresAt, Instant createdAt, boolean revoked, Instant revokedAt) {
-        this.tokenId = tokenId;
+    public RefreshToken(UUID id, UUID userId, String role, Instant expiresAt, Instant createdAt, boolean revoked, Instant revokedAt) {
+        this.id = id;
         this.userId = userId;
         this.role = role;
         this.expiresAt = expiresAt;
@@ -34,8 +34,8 @@ public class RefreshToken {
 
         return new RefreshToken(UUID.randomUUID(), userId, role, Instant.now().plus(ttl), Instant.now(), false, null);
     }
-    public static RefreshToken restore(UUID tokenId, UUID userId, String role, Instant expiresAt, Instant createdAt, boolean revoked, Instant revokedAt) {
-        return new RefreshToken(tokenId, userId, role, expiresAt, createdAt, revoked, revokedAt);
+    public static RefreshToken restore(UUID id, UUID userId, String role, Instant expiresAt, Instant createdAt, boolean revoked, Instant revokedAt) {
+        return new RefreshToken(id, userId, role, expiresAt, createdAt, revoked, revokedAt);
     }
 
     public boolean isValid() {
@@ -60,8 +60,8 @@ public class RefreshToken {
         return Duration.between(Instant.now(), expiresAt);
     }
 
-    public UUID getTokenId() {
-        return tokenId;
+    public UUID getId() {
+        return id;
     }
 
     public UUID getUserId() {

@@ -9,16 +9,16 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "refresh_token", indexes = {
-        @Index(name = "idx_refresh_token_user_id", columnList = "userId"),
-        @Index(name = "idx_refresh_token_token_id", columnList = "tokenId"),
-        @Index(name = "idx_refresh_token_expires_at", columnList = "expiresAt"),
-        @Index(name = "idx_refresh_token_created_at", columnList = "createdAt")
+        @Index(name = "idx_refresh_token_user_id", columnList = "user_id"),
+        @Index(name = "idx_refresh_token_token_id", columnList = "id"),
+        @Index(name = "idx_refresh_token_expires_at", columnList = "expires_at"),
+        @Index(name = "idx_refresh_token_created_at", columnList = "created_at")
 })
 public class RefreshTokenJpaEntity {
 
-    @Column(name = "token_id", nullable = false, unique = true)
+    @Column(name = "id", nullable = false, unique = true)
     @Id
-    private UUID tokenId;
+    private UUID id;
     @Column(name = "user_id", nullable = false)
     private  UUID userId;
     @Column(name = "role", nullable = false)
@@ -36,8 +36,8 @@ public class RefreshTokenJpaEntity {
     @Column(name = "revoked_at")
     private Instant revokedAt;
 
-    public RefreshTokenJpaEntity(UUID tokenId, UUID userId, String role, Instant expiresAt, Instant createdAt, boolean revoked, Instant revokedAt) {
-        this.tokenId = tokenId;
+    public RefreshTokenJpaEntity(UUID id, UUID userId, String role, Instant expiresAt, Instant createdAt, boolean revoked, Instant revokedAt) {
+        this.id = id;
         this.userId = userId;
         this.role = role;
         this.expiresAt = expiresAt;
@@ -58,8 +58,8 @@ public class RefreshTokenJpaEntity {
         this.revokedAt = revokedAt;
     }
 
-    public UUID getTokenId() {
-        return tokenId;
+    public UUID getId() {
+        return id;
     }
 
     public UUID getUserId() {

@@ -48,11 +48,11 @@
                     throw new InvalidRefreshTokenException();
                 }
 
-                token = refreshTokenRepository.findByTokenId(tokenId);
+                token = refreshTokenRepository.findById(tokenId);
 
             } else {
 
-                token = refreshTokenRepository.findByTokenId(tokenId);
+                token = refreshTokenRepository.findById(tokenId);
 
                 if (token == null || !token.isValid()) {
                     throw new InvalidRefreshTokenException();
@@ -95,7 +95,7 @@
             );
 
             redisService.saveRefreshToken(
-                    newToken.getTokenId(),
+                    newToken.getId(),
                     newCache,
                     newToken.getRemainingTime()
             );
@@ -107,7 +107,7 @@
 
             return new RefreshTokenResponse(
                     accessToken,
-                    newToken.getTokenId().toString()
+                    newToken.getId().toString()
             );
         }
 
