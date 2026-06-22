@@ -1,8 +1,12 @@
 package com.microsservice.auth.infra;
 
+import com.microsservice.auth.infra.security.JwtProperties;
 import com.microsservice.auth.infra.security.JwtServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.UUID;
 
