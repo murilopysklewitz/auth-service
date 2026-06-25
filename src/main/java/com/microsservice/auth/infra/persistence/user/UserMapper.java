@@ -1,7 +1,10 @@
 package com.microsservice.auth.infra.persistence.user;
 
 import com.microsservice.auth.domain.User;
+import org.springframework.stereotype.Component;
 
+
+@Component
 public class UserMapper {
 
     public static User toDomain(UserJpaEntity entity) {

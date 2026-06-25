@@ -1,7 +1,9 @@
 package com.microsservice.auth.infra.persistence.refreshToken;
 
 import com.microsservice.auth.domain.RefreshToken;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RefreshTokenMapper {
     public RefreshToken toDomain(RefreshTokenJpaEntity entity){
         RefreshToken domain = RefreshToken.restore(

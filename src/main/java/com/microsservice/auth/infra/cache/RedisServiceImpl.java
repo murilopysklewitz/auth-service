@@ -9,9 +9,9 @@ import java.util.UUID;
 
 @Service
 public class RedisServiceImpl implements RedisService {
-    private final RedisTemplate<String, RefreshTokenCacheData> redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
 
-    public RedisServiceImpl(RedisTemplate<String, RefreshTokenCacheData> redisTemplate) {
+    public RedisServiceImpl(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
     private String getKey(UUID tokenId) {
@@ -26,7 +26,8 @@ public class RedisServiceImpl implements RedisService {
 
     @Override
     public Optional<RefreshTokenCacheData> getRefreshToken(UUID tokenId) {
-        return Optional.ofNullable(redisTemplate.opsForValue().get(getKey(tokenId)));
+        Object data = redisTemplate.opsForValue().get(getKey(tokenId));
+        return Optional.ofNullable((RefreshTokenCacheData) data);
     }
 
     @Override

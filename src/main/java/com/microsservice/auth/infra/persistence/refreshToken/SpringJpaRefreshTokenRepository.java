@@ -11,7 +11,6 @@ public interface SpringJpaRefreshTokenRepository extends JpaRepository<RefreshTo
     @Query("UPDATE RefreshTokenJpaEntity r SET r.revoked = true WHERE r.userId = :userId")
     @Modifying
     void revokeTokensForUser(UUID userId);
-    void delete(UUID refreshTokenId);
     @Query("DELETE FROM RefreshTokenJpaEntity r WHERE r.expiresAt < CURRENT_TIMESTAMP")
     @Modifying
     void deleteExpiredTokens();

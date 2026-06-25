@@ -37,7 +37,7 @@ public class JpaRefreshTokenRepository implements RefreshTokenRepository {
 
     @Override
     public void deleteById(UUID refreshTokenId) {
-        repository.delete(refreshTokenId);
+        repository.deleteById(refreshTokenId);
     }
 
     @Override

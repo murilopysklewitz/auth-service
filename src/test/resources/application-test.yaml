@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:16:///testdb
+
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: admin
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+
+  logging:
+    level:
+      org.flywaydb: DEBUG
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    baseline-version: 0
+
+
+jwt:
+  secret: test-secret-key-with-at-least-32-charactersdzbhxtjyygcyjcyfsrnyn6sri6bdjysrbjskdytdgfkn8fysrnjyrs
+  access-token-expiration: 900000
+  refresh-token-expiration: 604800000
+  refresh-expiration: 604800000
