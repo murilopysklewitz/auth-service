@@ -30,6 +30,7 @@ jwt:
   refresh-expiration: 604800000
 debug: true
 
+
 logging:
   level:
     org.springframework.boot.autoconfigure.flyway: TRACE

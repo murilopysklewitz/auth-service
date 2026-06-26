@@ -15,7 +15,6 @@ import java.util.UUID;
 @Entity
 public class UserJpaEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
     @Column(name = "email", nullable = false, unique = true, length = 60)
@@ -28,8 +27,6 @@ public class UserJpaEntity {
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserStatus status;
-
-
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp

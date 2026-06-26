@@ -1,12 +1,14 @@
 package com.microsservice.auth.domain;
 
 import com.microsservice.auth.domain.exceptions.*;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class User {
-
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     private String email;
@@ -23,8 +25,7 @@ public class User {
     private User(String email,
                  String passwordHash,
                  UserRole role) {
-
-        this.id = null;
+        this.id = UUID.randomUUID();
         this.email = email;
         this.passwordHash = passwordHash;
         this.role = role;
