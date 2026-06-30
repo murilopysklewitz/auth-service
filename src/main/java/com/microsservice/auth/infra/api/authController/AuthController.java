@@ -45,8 +45,7 @@ public class AuthController {
     public RegisterUserResponse registerUser(@RequestBody @Valid RegisterUserWebRequest request) {
         RegisterUserRequest request1 = new RegisterUserRequest(
                 request.getEmail(),
-                request.getPassword(),
-                request.getRole()
+                request.getPassword()
         );
         RegisterUserResponse response = registerUserUseCase.execute(request1);
         return response;

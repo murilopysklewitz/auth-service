@@ -10,13 +10,10 @@ public class RegisterUserWebRequest {
     private final String email;
     @NotNull
     private final String password;
-    @NotNull
-    private final UserRole role;
 
-    public RegisterUserWebRequest(String email, String password, UserRole role) {
+    public RegisterUserWebRequest(String email, String password) {
         this.email = email;
         this.password = password;
-        this.role = role;
     }
 
     public String getEmail() {
@@ -25,9 +22,5 @@ public class RegisterUserWebRequest {
 
     public String getPassword() {
         return password;
-    }
-
-    public UserRole getRole() {
-        return role;
     }
 }

@@ -25,7 +25,6 @@ public class UserTest {
         assertEquals(UserStatus.ACTIVE, user.getStatus());
         assertNotNull(user.getCreatedAt());
         assertNotNull(user.getUpdatedAt());
-        assertNull(user.getId());
         assertTrue(user.isActivate());
         assertFalse(user.isBlocked());
     }

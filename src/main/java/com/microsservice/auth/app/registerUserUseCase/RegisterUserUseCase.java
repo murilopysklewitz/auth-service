@@ -1,5 +1,6 @@
 package com.microsservice.auth.app.registerUserUseCase;
 
+import com.microsservice.auth.domain.UserRole;
 import com.microsservice.auth.domain.exceptions.EmailAlreadyRegisteredException;
 import com.microsservice.auth.domain.ports.JwtService;
 import com.microsservice.auth.domain.ports.PasswordHasher;
@@ -27,7 +28,7 @@ public class RegisterUserUseCase {
             throw new EmailAlreadyRegisteredException(request.getEmail());
         }
         String passwordHash = passwordHasher.hash(request.getPassword());
-        User newUser = User.create(request.getEmail(), passwordHash, request.getRole());
+        User newUser = User.create(request.getEmail(), passwordHash, UserRole.USER);
 
         userRepository.save(newUser);
         return new RegisterUserResponse(newUser.getId(), newUser.getEmail(), newUser.getRole());
