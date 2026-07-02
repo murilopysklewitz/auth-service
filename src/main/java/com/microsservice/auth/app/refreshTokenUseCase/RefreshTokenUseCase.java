@@ -82,6 +82,7 @@
 
             RefreshToken newToken = RefreshToken.create(
                     token.getUserId(),
+                    token.getEmail(),
                     token.getRole(),
                     Duration.ofDays(7)
             );
@@ -102,6 +103,7 @@
 
             String accessToken = jwtService.generateToken(
                     newToken.getUserId(),
+                    newToken.getEmail(),
                     newToken.getRole()
             );
 

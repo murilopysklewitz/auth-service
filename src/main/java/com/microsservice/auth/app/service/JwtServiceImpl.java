@@ -1,10 +1,10 @@
-package com.microsservice.auth.infra.security;
+package com.microsservice.auth.app.service;
 
 import com.microsservice.auth.domain.ports.JwtService;
+import com.microsservice.auth.infra.security.JwtProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -26,10 +26,11 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public String generateToken(UUID userId, String role) {
+    public String generateToken(UUID userId, String email,  String role) {
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", role);
+        claims.put("email", email);
 
         return Jwts.builder()
                 .claims(claims)
@@ -61,6 +62,11 @@ public class JwtServiceImpl implements JwtService {
         Claims claims = extractClaim(token);
         return claims.get("role", String.class);
 
+    }
+    @Override
+    public String extractEmail(String email){
+        Claims claims = extractClaim(email);
+        return claims.get("email", String.class);
     }
 
     @Override

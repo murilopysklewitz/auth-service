@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class RefreshTokenTest {
     private UUID tokenId;
     private UUID userId;
+    private String email;
     private String role;
     private Instant expiresAt;
     private Instant createdAt;
@@ -27,6 +28,7 @@ public class RefreshTokenTest {
     void setUp() {
         tokenId = UUID.randomUUID();
         userId = UUID.randomUUID();
+        email = "test@gmail.com";
         role = "USER";
         ttl = Duration.ofDays(7);
         expiresAt = Instant.now().plus(ttl);
@@ -37,7 +39,7 @@ public class RefreshTokenTest {
 
     @Test
     void shouldCreateAValidRefreshToken() {
-        RefreshToken refreshToken = RefreshToken.create(userId, role, ttl);
+        RefreshToken refreshToken = RefreshToken.create(userId, email, role, ttl);
 
         assertNotNull(refreshToken);
         assertNotNull(refreshToken.getId());
@@ -52,38 +54,38 @@ public class RefreshTokenTest {
 
     @Test
     void shouldThrowExceptionWhenCreatingWithNullUserId() {
-        assertThrows(IllegalArgumentException.class, () -> RefreshToken.create(null, role, ttl));
+        assertThrows(IllegalArgumentException.class, () -> RefreshToken.create(null, email,role, ttl));
     }
 
 
     @Test
     void shouldThrowExceptionWhenCreatingWithNullRole() {
-        assertThrows(IllegalArgumentException.class, () -> RefreshToken.create(userId, null, ttl));
+        assertThrows(IllegalArgumentException.class, () -> RefreshToken.create(userId, email, null, ttl));
     }
 
     @Test
     void shouldThrowExceptionWhenCreatingWithBlankRole() {
-        assertThrows(IllegalArgumentException.class, () -> RefreshToken.create(userId, "", ttl));
+        assertThrows(IllegalArgumentException.class, () -> RefreshToken.create(userId, email, "", ttl));
     }
 
     @Test
     void shouldThrowExceptionWhenCreatingWithNullTtl() {
-        assertThrows(IllegalArgumentException.class, () -> RefreshToken.create(userId, role, null));
+        assertThrows(IllegalArgumentException.class, () -> RefreshToken.create(userId, email, role, null));
     }
 
     @Test
     void shouldThrowExceptionWhenCreatingWithNegativeTtl() {
-        assertThrows(IllegalArgumentException.class, () -> RefreshToken.create(userId, role, Duration.ofDays(-1)));
+        assertThrows(IllegalArgumentException.class, () -> RefreshToken.create(userId, email, role, Duration.ofDays(-1)));
     }
 
     @Test
     void shouldThrowExceptionWhenCreatingWithZeroTtl() {
-        assertThrows(IllegalArgumentException.class, () -> RefreshToken.create(userId, role, Duration.ZERO));
+        assertThrows(IllegalArgumentException.class, () -> RefreshToken.create(userId, email, role, Duration.ZERO));
     }
 
     @Test
     void shouldRestoreRefreshToken() {
-        RefreshToken refreshToken = RefreshToken.restore(tokenId, userId, role, expiresAt, createdAt, revoked, revokedAt);
+        RefreshToken refreshToken = RefreshToken.restore(tokenId, userId, email, role, expiresAt, createdAt, revoked, revokedAt);
 
         assertEquals(tokenId, refreshToken.getId());
         assertEquals(userId, refreshToken.getUserId());
@@ -96,20 +98,20 @@ public class RefreshTokenTest {
 
     @Test
     void shouldBeValidWhenNotRevokedAndNotExpired() {
-        RefreshToken refreshToken = RefreshToken.create(userId, role, ttl);
+        RefreshToken refreshToken = RefreshToken.create(userId, email, role, ttl);
         assertTrue(refreshToken.isValid());
     }
 
     @Test
     void shouldNotBeValidWhenRevoked() {
-        RefreshToken refreshToken = RefreshToken.create(userId, role, ttl);
+        RefreshToken refreshToken = RefreshToken.create(userId, email, role, ttl);
         refreshToken.revoke();
         assertFalse(refreshToken.isValid());
     }
 
     @Test
     void shouldNotBeValidWhenExpired() {
-        RefreshToken refreshToken = RefreshToken.create(userId, role, Duration.ofMillis(1));
+        RefreshToken refreshToken = RefreshToken.create(userId, email, role, Duration.ofMillis(1));
         try {
             Thread.sleep(10);
         } catch (InterruptedException e) {
@@ -120,7 +122,7 @@ public class RefreshTokenTest {
 
     @Test
     void shouldRevokeToken() {
-        RefreshToken refreshToken = RefreshToken.create(userId, role, ttl);
+        RefreshToken refreshToken = RefreshToken.create(userId, email, role, ttl);
         refreshToken.revoke();
 
         assertTrue(refreshToken.isRevoked());
@@ -130,7 +132,7 @@ public class RefreshTokenTest {
 
     @Test
     void shouldDetectExpiredToken() {
-        RefreshToken refreshToken = RefreshToken.create(userId, role, Duration.ofMillis(1));
+        RefreshToken refreshToken = RefreshToken.create(userId, email, role, Duration.ofMillis(1));
         try {
             Thread.sleep(10);
         } catch (InterruptedException e) {
@@ -141,20 +143,20 @@ public class RefreshTokenTest {
 
     @Test
     void shouldNotDetectExpiredWhenNotExpired() {
-        RefreshToken refreshToken = RefreshToken.create(userId, role, ttl);
+        RefreshToken refreshToken = RefreshToken.create(userId, email, role, ttl);
         assertFalse(refreshToken.isExpired());
     }
 
     @Test
     void shouldReturnRemainingTime() {
-        RefreshToken refreshToken = RefreshToken.create(userId, role, ttl);
+        RefreshToken refreshToken = RefreshToken.create(userId, email, role, ttl);
         Duration remaining = refreshToken.getRemainingTime();
         assertTrue(remaining.compareTo(ttl) <= 0);
     }
 
     @Test
     void shouldReturnNegativeRemainingTimeWhenExpired() {
-        RefreshToken refreshToken = RefreshToken.create(userId, role, Duration.ofMillis(1));
+        RefreshToken refreshToken = RefreshToken.create(userId, email, role, Duration.ofMillis(1));
         try {
             Thread.sleep(10);
         } catch (InterruptedException e) {

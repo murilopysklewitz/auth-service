@@ -47,11 +47,13 @@ public class LoginUseCase {
 
         String accessToken = jwtService.generateToken(
                 user.getId(),
+                user.getEmail(),
                 user.getRole().name()
         );
 
         RefreshToken refreshToken = RefreshToken.create(
                 user.getId(),
+                user.getEmail(),
                 user.getRole().name(),
                 Duration.ofMillis(refreshExpiration)
         );

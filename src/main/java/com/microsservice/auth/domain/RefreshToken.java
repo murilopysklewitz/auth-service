@@ -11,15 +11,17 @@ public class RefreshToken {
     private final UUID id;
     private final UUID userId;
     private final String role;
+    private final String email;
 
     private final Instant expiresAt;
     private final Instant createdAt;
     private boolean revoked;
     private Instant revokedAt;
 
-    public RefreshToken(UUID id, UUID userId, String role, Instant expiresAt, Instant createdAt, boolean revoked, Instant revokedAt) {
+    public RefreshToken(UUID id, UUID userId, String email, String role, Instant expiresAt, Instant createdAt, boolean revoked, Instant revokedAt) {
         this.id = id;
         this.userId = userId;
+        this.email = email;
         this.role = role;
         this.expiresAt = expiresAt;
         this.createdAt = createdAt;
@@ -27,15 +29,16 @@ public class RefreshToken {
         this.revokedAt = revokedAt;
     }
 
-    public static RefreshToken create(UUID userId, String role, Duration ttl) {
+    public static RefreshToken create(UUID userId, String email, String role, Duration ttl) {
         if(userId == null) throw new IllegalArgumentException("userId cannot be null or blank");
+        if(email == null) throw new IllegalArgumentException("email cannot be null or blank");
         if(role == null || role.isBlank()) throw new IllegalArgumentException("role cannot be null or blank");
         if(ttl == null || ttl.isNegative() || ttl.isZero()) throw new IllegalArgumentException("ttl must be a positive duration");
 
-        return new RefreshToken(UUID.randomUUID(), userId, role, Instant.now().plus(ttl), Instant.now(), false, null);
+        return new RefreshToken(UUID.randomUUID(), userId, email, role, Instant.now().plus(ttl), Instant.now(), false, null);
     }
-    public static RefreshToken restore(UUID id, UUID userId, String role, Instant expiresAt, Instant createdAt, boolean revoked, Instant revokedAt) {
-        return new RefreshToken(id, userId, role, expiresAt, createdAt, revoked, revokedAt);
+    public static RefreshToken restore(UUID id, UUID userId,String email, String role, Instant expiresAt, Instant createdAt, boolean revoked, Instant revokedAt) {
+        return new RefreshToken(id, userId, email, role, expiresAt, createdAt, revoked, revokedAt);
     }
 
     public boolean isValid() {
@@ -66,6 +69,10 @@ public class RefreshToken {
 
     public UUID getUserId() {
         return userId;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getRole() {

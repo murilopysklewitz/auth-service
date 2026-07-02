@@ -1,12 +1,9 @@
 package com.microsservice.auth.infra;
 
 import com.microsservice.auth.infra.security.JwtProperties;
-import com.microsservice.auth.infra.security.JwtServiceImpl;
+import com.microsservice.auth.app.service.JwtServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.util.UUID;
 
@@ -19,10 +16,12 @@ class JwtServiceImplTest {
 
     private UUID userId;
     private String role;
+    private String email;
 
     @BeforeEach
     void setUp() {
         userId = UUID.randomUUID();
+        email = "abc@gmail.com";
         role = "USER";
 
         JwtProperties props = new JwtProperties();
@@ -34,7 +33,7 @@ class JwtServiceImplTest {
 
     @Test
     void shouldGenerateValidToken() {
-        String token = jwtService.generateToken(userId, role);
+        String token = jwtService.generateToken(userId, email,  role);
 
         assertTrue(jwtService.isTokenValid(token));
         assertEquals(role, jwtService.extractRole(token));
