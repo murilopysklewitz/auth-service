@@ -10,7 +10,7 @@ public interface RefreshTokenRepository {
     RefreshToken findById(UUID id);
 
     void deleteById(UUID refreshTokenId);
-
+    void revokeById(UUID id);
 
     void revokeTokensForUser(UUID userId);
     void deleteExpiredTokens();

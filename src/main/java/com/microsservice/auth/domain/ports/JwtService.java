@@ -8,7 +8,7 @@ public interface JwtService {
     boolean isTokenValid(String token);
     String extractRole(String token);
 
-    String extractEmail(String email);
+    String extractEmail(String token);
 
     String extractJti(String token);
     Date extractExpiration(String token);

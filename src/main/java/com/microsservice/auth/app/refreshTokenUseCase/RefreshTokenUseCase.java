@@ -48,42 +48,28 @@
                     throw new InvalidRefreshTokenException();
                 }
 
-                token = refreshTokenRepository.findById(tokenId);
-
             } else {
-
                 token = refreshTokenRepository.findById(tokenId);
 
                 if (token == null || !token.isValid()) {
                     throw new InvalidRefreshTokenException();
                 }
-
                 data = new RefreshTokenCacheData(
                         token.getUserId(),
+                        token.getEmail(),
                         token.getRole(),
                         token.getExpiresAt()
                 );
-
-                redisService.saveRefreshToken(
-                        tokenId,
-                        data,
-                        token.getRemainingTime()
-                );
             }
 
-            if (token == null || !token.isValid()) {
-                throw new InvalidRefreshTokenException();
-            }
-
-            token.revoke();
-            refreshTokenRepository.save(token);
+            refreshTokenRepository.revokeById(tokenId);
 
             redisService.deleteRefreshToken(tokenId);
 
             RefreshToken newToken = RefreshToken.create(
-                    token.getUserId(),
-                    token.getEmail(),
-                    token.getRole(),
+                    data.userId(),
+                    data.email(),
+                    data.role(),
                     Duration.ofDays(7)
             );
 
@@ -91,6 +77,7 @@
 
             RefreshTokenCacheData newCache = new RefreshTokenCacheData(
                     newToken.getUserId(),
+                    newToken.getEmail(),
                     newToken.getRole(),
                     newToken.getExpiresAt()
             );

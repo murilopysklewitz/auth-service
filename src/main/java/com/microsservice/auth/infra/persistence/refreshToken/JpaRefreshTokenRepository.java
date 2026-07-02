@@ -41,6 +41,11 @@ public class JpaRefreshTokenRepository implements RefreshTokenRepository {
     }
 
     @Override
+    public void revokeById(UUID id) {
+        repository.revokeById(id);
+    }
+
+    @Override
     public void revokeTokensForUser(UUID userId) {
             repository.revokeTokensForUser(userId);
     }
